@@ -1,0 +1,89 @@
+{% extends "base5.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row"><!-- fila en editar -->
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Autor</h2>
+        <!-- Tarjeta -->
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarAutor/" method="post" enctype="multipart/form-data"> {% csrf_token %}
+                    
+                    <!-- ID del Autor -->
+                    <div class="form-group">
+                        <input type="text" id="txtIdautor" name="txtIdautor" class="form-control"
+                               value="{{ losautores.id_autor }}" minlength="1" maxlength="6" required readonly>
+                    </div>
+
+                    <!-- ID Editorial -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtidedit" name="txtidedit" class="form-control"
+                               value="{{ losautores.id_edit }}" maxlength="6" required>
+                    </div>
+
+                    <!-- ID Manga -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtidmanga" name="txtidmanga" class="form-control"
+                               value="{{ losautores.id_manga }}" maxlength="6" required>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+                               value="{{ losautores.nombre }}" maxlength="100" required>
+                    </div>
+
+                    <!-- Apellidos -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtapellidos" name="txtapellidos" class="form-control"
+                               value="{{ losautores.apellidos }}" maxlength="100" required>
+                    </div>
+
+                    <!-- Foto -->
+                    <div class="form-group py-3">
+                        <label for="foto">Foto del Autor</label>
+                        <input type="file" id="foto" name="foto" class="form-control">
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtestado" name="txtestado" class="form-control"
+                               value="{{ losautores.estado }}" maxlength="50" required>
+                    </div>
+
+                    <!-- Nacionalidad -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnacional" name="txtnacional" class="form-control"
+                               value="{{ losautores.nacionalidad }}" maxlength="50" required>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="form-group py-3">
+                        <input type="text" id="numtel" name="numtel" class="form-control"
+                               value="{{ losautores.num_tel }}" maxlength="10" required>
+                    </div>
+
+                    <!-- Correo -->
+                    <div class="form-group py-3">
+                        <input type="email" id="txtcorreo" name="txtcorreo" class="form-control"
+                               value="{{ losautores.correo }}" maxlength="100" required>
+                    </div>
+
+                    <!-- Ciudad -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtciudad" name="txtciudad" class="form-control"
+                               value="{{ losautores.ciudad }}" maxlength="100" required>
+                    </div>
+
+                    <!-- Botón Guardar -->
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-success">Guardar Autor</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

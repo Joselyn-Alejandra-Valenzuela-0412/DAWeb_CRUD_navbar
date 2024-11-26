@@ -1,0 +1,136 @@
+{% extends "base5.html" %}
+
+{% block cuerpo %}
+{% load static %}
+
+<div class="row"> <!-- la fila -->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- columna izquierda -->
+        <h1>Registrar Autor</h1>
+        <div class="card"> <!-- la tarjeta -->
+            <div class="card-body">
+                <form action="registrarAutor/" method="POST" enctype="multipart/form-data">  {% csrf_token %}
+
+                    <!-- ID del Autor -->
+                    <div class="form-group">
+                        <input type="text" id="txtIdautor" name="txtIdautor" class="form-control"
+                               placeholder="Código Autor" maxlength="6" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtidedit" name="txtidedit" class="form-control"
+                               placeholder="ID Editorial" maxlength="6" required>
+                    </div>
+
+                    <!-- ID de Manga -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtidmanga" name="txtidmanga" class="form-control"
+                               placeholder="ID Manga" maxlength="6" required>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+                               placeholder="Nombre" maxlength="100" required>
+                    </div>
+
+                    <!-- Apellidos -->
+                    <div class="form-group py-1.5">
+                        <input type="text" id="txtapellidos" name="txtapellidos" class="form-control"
+                               placeholder="Apellidos" maxlength="100" required>
+                    </div>
+
+                    <!-- Foto -->
+                    <div class="form-group py-3">
+                        <input type="file" id="foto" name="foto" class="form-control">
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtestado" name="txtestado" class="form-control"
+                               placeholder="Estado" maxlength="50" required>
+                    </div>
+
+                    <!-- Nacionalidad -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnacional" name="txtnacional" class="form-control"
+                               placeholder="Nacionalidad" maxlength="50" required>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="form-group py-3">
+                        <input type="text" id="numtel" name="numtel" class="form-control"
+                               placeholder="Teléfono" maxlength="10" required>
+                    </div>
+
+                    <!-- Correo -->
+                    <div class="form-group py-3">
+                        <input type="email" id="txtcorreo" name="txtcorreo" class="form-control"
+                               placeholder="Correo" maxlength="100" required>
+                    </div>
+
+                    <!-- Ciudad -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtciudad" name="txtciudad" class="form-control"
+                               placeholder="Ciudad" maxlength="100" required>
+                    </div>
+
+                    <!-- Botón Guardar -->
+                    <div class="form-group py-4">
+                        <button type="submit" class="btn btn-success">Guardar Autor</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- la tarjeta -->
+    </div><!-- columna izquierda -->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- columna derecha -->
+        <h1>Listado de Autores</h1>
+        <img class="w-50" src="{% static "img/autores.jpg"  %}" alt="valenzuela" width="50" height="300">
+        <br>
+        <br>
+        <!-- tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Autor</th>
+                    <th scope="col">ID Editorial</th>
+                    <th scope="col">ID Manga</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Nacionalidad</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for autor in losautores %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ autor.id_autor }}</td>
+                    <td>{{ autor.id_edit }}</td>
+                    <td>{{ autor.id_manga }}</td>
+                    <td>{{ autor.nombre }}</td>
+                    <td>{{ autor.apellidos }}</td>
+                    <td><img src="{{ autor.foto.url }}" alt="Foto de {{ autor.nombre }}" width="50" height="50"></td>
+                    <td>{{ autor.estado }}</td>
+                    <td>{{ autor.nacionalidad }}</td>
+                    <td>{{ autor.num_tel }}</td>
+                    <td>{{ autor.correo }}</td>
+                    <td>{{ autor.ciudad }}</td>
+
+                    <!-- Botón Editar -->
+                    <td><a href="seleccionarAutor/{{ autor.id_autor }}" class="btn btn-info">Editar</a></td>
+                    <!-- Botón Borrar -->
+                    <td><a href="borrarAutor/{{ autor.id_autor }}" class="btn btn-danger">Borrar</a></td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div><!-- columna derecha -->
+</div><!-- la fila -->
+{% endblock %}
