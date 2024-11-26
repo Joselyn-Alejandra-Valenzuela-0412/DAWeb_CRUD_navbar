@@ -1,0 +1,89 @@
+
+{% extends "base5.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row"> <!-- la fila -->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- columna izquierda -->
+        <h1>Editorial</h1>
+        <div class="card"> <!-- la tarjeta -->
+            <div class="card-body">
+                <form action="registrarEditorial/" method="post"> {% csrf_token %}<!-- Corrige el método y el action NO  OLVIDES ESTA LINEA SI NO NO JALA -->
+                    
+                    <div class="form-group">
+                        <input type="text" id="txtIdeditorial" name="txtIdeditorial" class="form-control"
+                        placeholder="Codigo Editorial" minlength="1" maxlength="6" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+                        placeholder="Nombre Editorial" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-1.5">
+                        <input type="text" id="txtpais" name="txtpais" class="form-control"
+                        placeholder="Pais Editorial" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2"><!--pendienteeeeeeeeeeeeeeeeeeeee-->
+                        <h6>Fecha de fundación</h6>
+                        <input type="date" id="dateaniofundac" name="dateaniofundac" class="form-control"
+                        placeholder="fecha Fundación"  required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtfundador" name="txtfundador" class="form-control"
+                        placeholder="Nombre Fundador" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-1.5">
+                        <input type="text" id="txtcorreo" name="txtcorreo" class="form-control"
+                        placeholder="Correo" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtproyectos" name="txtproyectos" class="form-control"
+                        placeholder="Proyectos" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-4">
+                        <button type="submit" class="btn btn-success">Guardar Editorial</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- la tarjeta -->
+    </div><!-- columna izquierda -->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- columna derecha -->
+        <h1>Listado de Editoriales</h1>
+        <img class="w-50" src="{% static "img/edit.jpg"  %}" alt="valenzuela" width="50" height="300">
+        <!-- tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id_Edit</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">País</th>
+                    <th scope="col">Año_Fundac</th>
+                    <th scope="col">Fundador</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Proyectos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for l in laseditoriales %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ l.id_edit }}</td>
+                    <td>{{ l.nombre }}</td>
+                    <td>{{ l.pais }}</td>
+                    <td>{{ l.anio_fundac }}</td>
+                    <td>{{ l.fundador }}</td>
+                    <td>{{ l.correo }}</td>
+                    <td>{{ l.proyectos }}</td>
+                    
+                    
+                    <td><a href="seleccionarEditorial/{{l.id_edit}}" class="btn btn-info">Editar</a></td><!--falta todavia-->
+                    <td><a href="borrarEditorial/{{l.id_edit}}" class="btn btn-danger">Borrar</a></td><!--falta todavia-->
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div><!-- columna derecha -->
+</div><!-- la fila -->
+{% endblock %}

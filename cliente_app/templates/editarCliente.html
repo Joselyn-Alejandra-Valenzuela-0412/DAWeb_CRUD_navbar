@@ -1,0 +1,65 @@
+{% extends "base5.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row"><!--fila en editar-->
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Cliente</h2>
+        <!-- Tarjeta -->
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarCliente/" method="post"> {% csrf_token %}
+                    
+                    <!-- ID del Cliente -->
+                    <div class="form-group">
+                        <input type="text" id="txtIdcliente" name="txtIdcliente" class="form-control"
+                               value="{{ losclientes.id_cliente }}" minlength="1" maxlength="6" required readonly>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+                               value="{{ losclientes.nombre }}" maxlength="100" required>
+                    </div>
+
+                    <!-- Apellidos -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtapellidos" name="txtapellidos" class="form-control"
+                               value="{{ losclientes.apellidos }}" maxlength="100" required>
+                    </div>
+
+                    <!-- Producto Adquirido -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtprodadqu" name="txtprodadqu" class="form-control"
+                               value="{{ losclientes.prod_adqu }}" maxlength="255" required>
+                    </div>
+
+                    <!-- Tipo de Pago -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txttipopago" name="txttipopago" class="form-control"
+                               value="{{ losclientes.tipo_pago }}" maxlength="50" required>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="form-group py-3">
+                        <input type="text" id="numtelefono" name="numtelefono" class="form-control"
+                               value="{{ losclientes.num_tel }}" maxlength="10" required>
+                    </div>
+
+                    <!-- Total Compra -->
+                    <div class="form-group py-3">
+                        <input type="number" id="numtotalcomp" name="numtotalcomp" class="form-control"
+                               value="{{ losclientes.total_compra }}" min="0" maxlength="6" required>
+                    </div>
+
+                    <!-- Botón Guardar -->
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-success">Guardar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
