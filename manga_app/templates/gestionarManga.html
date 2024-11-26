@@ -1,0 +1,104 @@
+{% extends "base5.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row"> <!-- la fila -->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- columna izquierda -->
+        <h1>Registrar Manga</h1>
+        <div class="card"> <!-- la tarjeta -->
+            <div class="card-body">
+                <form action="registrarManga/" method="post"> 
+                    {% csrf_token %} <!-- Protección CSRF -->
+
+                    <!-- ID del Manga -->
+                    <div class="form-group">
+                        <input type="text" id="txtIdmanga" name="txtIdmanga" class="form-control"
+                               placeholder="Código Manga" maxlength="6" required>
+                    </div>
+
+                    <!-- Título -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txttitulo" name="txttitulo" class="form-control"
+                               placeholder="Título" maxlength="100" required>
+                    </div>
+
+                    <!-- Volumen -->
+                    <div class="form-group py-1.5">
+                        <input type="text" id="numvolumen" name="numvolumen" class="form-control"
+                               placeholder="Volumen" maxlength="25" required>
+                    </div>
+
+                    <!-- Género -->
+                    <div class="form-group py-2">
+                        <input type="text" id="txtgenero" name="txtgenero" class="form-control"
+                               placeholder="Género" maxlength="50" required>
+                    </div>
+
+                    <!-- Sinopsis -->
+                    <div class="form-group py-3">
+                        <textarea id="txtsinopsis" name="txtsinopsis" class="form-control"
+                                  rows="4" maxlength="500" placeholder="Sinopsis" required></textarea>
+                    </div>
+
+                    <!-- Fecha de Publicación -->
+                    <div class="form-group py-3">
+                        <h6>Fecha de publicacion</h6>
+                        <input type="date" id="datefechap" name="datefechap" class="form-control"
+                               placeholder="Fecha Publicación" required>
+                    </div>
+
+                    <!-- Precio -->
+                    <div class="form-group py-3">
+                        <input type="number" id="numprecio" name="numprecio" class="form-control"
+                               placeholder="Precio" min="0" required>
+                    </div>
+
+                    <!-- Botón Guardar -->
+                    <div class="form-group py-4">
+                        <button type="submit" class="btn btn-success">Guardar Manga</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- la tarjeta -->
+    </div><!-- columna izquierda -->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- columna derecha -->
+        <h1>Listado de Mangas</h1>
+        <img class="w-50" src="{% static "img/super.jpg"  %}" alt="valenzuela" width="50" height="300">
+        <!-- tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Manga</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Volumen</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Sinopsis</th>
+                    <th scope="col">Fecha Publicación</th>
+                    <th scope="col">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for manga in losmangas %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ manga.id_manga }}</td>
+                    <td>{{ manga.titulo }}</td>
+                    <td>{{ manga.volumen }}</td>
+                    <td>{{ manga.genero }}</td>
+                    <td>{{ manga.sinopsis }}</td>
+                    <td>{{ manga.fecha_publ|date:"d-m-Y" }}</td>
+                    <td>{{ manga.precio }}</td>
+                    
+                    <!-- Botón Editar -->
+                    <td><a href="seleccionarManga/{{ manga.id_manga }}" class="btn btn-info">Editar</a></td>
+                    <!-- Botón Borrar -->
+                    <td><a href="borrarManga/{{ manga.id_manga }}" class="btn btn-danger">Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div><!-- columna derecha -->
+</div><!-- la fila -->
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base5.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row"><!--fila en editar-->
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Manga</h2>
+        <!-- Tarjeta -->
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarManga/" method="post"> {% csrf_token %}
+
+                    <!-- ID del Manga -->
+                    <div class="form-group">
+                        <input type="text" id="txtIdmanga" name="txtIdmanga" class="form-control"
+                               value="{{ losmangas.id_manga }}" minlength="1" maxlength="6" required readonly>
+                    </div>
+
+                    <!-- Título -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txttitulo" name="txttitulo" class="form-control"
+                               value="{{ losmangas.titulo }}" maxlength="100" required>
+                    </div>
+
+                    <!-- Volumen -->
+                    <div class="form-group py-3">
+                        <input type="text" id="numvolumen" name="numvolumen" class="form-control"
+                               value="{{ losmangas.volumen }}" maxlength="25" required>
+                    </div>
+
+                    <!-- Género -->
+                    <div class="form-group py-3">
+                        <input type="text" id="txtgenero" name="txtgenero" class="form-control"
+                               value="{{ losmangas.genero }}" maxlength="50" required>
+                    </div>
+
+                    <!-- Sinopsis -->
+                    <div class="form-group py-3">
+                        <textarea id="txtsinopsis" name="txtsinopsis" class="form-control"
+                                  rows="4" maxlength="500" required>{{ losmangas.sinopsis }}</textarea>
+                    </div>
+
+                    <!-- Fecha de Publicación -->
+                    <div class="form-group py-3">
+                        <h6>Fecha de publicacion</h6>
+                        <input type="date" id="datefechap" name="datefechap" class="form-control"
+                               value="{{ losmangas.fecha_publ }}" required>
+                    </div>
+
+                    <!-- Precio -->
+                    <div class="form-group py-3">
+                        <input type="number" id="numprecio" name="numprecio" class="form-control"
+                               value="{{ losmangas.precio }}" min="0" required>
+                    </div>
+
+                    <!-- Botón Guardar -->
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
