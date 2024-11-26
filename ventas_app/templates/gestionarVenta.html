@@ -1,0 +1,90 @@
+
+{% extends "base5.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row"> <!-- la fila -->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- columna izquierda -->
+        <h1>Venta</h1>
+        <div class="card"> <!-- la tarjeta -->
+            <div class="card-body">
+                <form action="registrarVenta/" method="post"> {% csrf_token %}<!-- Corrige el método y el action NO  OLVIDES ESTA LINEA SI NO NO JALA -->
+                    
+                    <div class="form-group">
+                        <input type="text" id="txtIdventa" name="txtIdventa" class="form-control"
+                        placeholder="Codigo Venta" minlength="1" maxlength="6" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtidmanga" name="txtidmanga" class="form-control"
+                        placeholder="Codigo manga" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-1.5">
+                        <input type="text" id="txtidemp" name="txtidemp" class="form-control"
+                        placeholder="codigo empleado" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2"><!--pendienteeeeeeeeeeeeeeeeeeeee-->
+                        
+                        <input type="text" id="txtidcliente" name="txtidcliente" class="form-control"
+                        placeholder="codigo cliente"  required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="numcantidad" name="numcantidad" class="form-control"
+                        placeholder="cantidad" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-1.5">
+                        <input type="number" id="numtotal" name="numtotal" class="form-control"
+                        placeholder="total de venta" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <h6>Fecha de venta</h6>
+                        <input type="date" id="datefechaventa" name="datefechaventa" class="form-control"
+                        placeholder="Fecha venta" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-4">
+                        <button type="submit" class="btn btn-success">Guardar Venta</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- la tarjeta -->
+    </div><!-- columna izquierda -->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- columna derecha -->
+        <h1>Listado de Ventas</h1>
+        <img class="w-50" src="{% static "img/dinero.jpg"  %}" alt="valenzuela" width="50" height="300">
+        <!-- tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id_Venta</th>
+                    <th scope="col">id_manga</th>
+                    <th scope="col">id_empleado</th>
+                    <th scope="col">id_cliente</th>
+                    <th scope="col">cantidad</th>
+                    <th scope="col">total</th>
+                    <th scope="col">Fecha de venta</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for v in lasventas %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ v.id_venta }}</td>
+                    <td>{{ v.id_manga }}</td>
+                    <td>{{ v.id_emp }}</td>
+                    <td>{{ v.id_cliente }}</td>
+                    <td>{{ v.cantidad }}</td>
+                    <td>{{ v.total }}</td>
+                    <td>{{ v.fecha_venta }}</td>
+                    
+                    
+                    <td><a href="seleccionarVenta/{{v.id_venta}}" class="btn btn-info">Editar</a></td><!--falta todavia-->
+                    <td><a href="borrarVenta/{{v.id_venta}}" class="btn btn-danger">Borrar</a></td><!--falta todavia-->
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div><!-- columna derecha -->
+</div><!-- la fila -->
+{% endblock %}

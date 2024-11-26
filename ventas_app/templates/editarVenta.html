@@ -1,0 +1,61 @@
+
+{% extends "base5.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row"><!--fila en editar-->
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Venta</h2>
+        <!--Aqui codigo tarjeta-->
+        <div class="card"> <!-- la tarjeta -->
+            <div class="card-body">
+                <form action="/editarVenta/" method="post"> 
+                    {% csrf_token %}<!-- Corrige el método y el action NO  OLVIDES ESTA LINEA SI NO NO JALA -->
+                    
+                    <div class="form-group">
+                        <input type="text" id="txtIdventa" name="txtIdventa" class="form-control"
+                        value="{{lasventas.id_venta}}"
+                        minlength="1" maxlength="6"  required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtidmanga" name="txtidmanga" class="form-control"
+                        value="{{lasventas.id_manga}}"
+                        maxlength="100"  required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidemp" name="txtidemp" class="form-control"
+                        value="{{lasventas.id_emp}}"
+                        minlength="1" maxlength="6"  required>
+                    </div>
+                    <div class="form-group py-3">
+                        
+                        <input type="text" id="txtidcliente" name="txtidcliente" class="form-control"
+                        value="{{lasventas.id_cliente}}"
+                        minlength="1" maxlength="6"   required>
+                    <div class="form-group py-3">
+                        <input type="number" id="numcantidad" name="numcantidad" class="form-control"
+                            value="{{lasventas.cantidad}}"
+                            minlength="1" maxlength="6"  required>
+                    <div class="form-group py-3">
+                                <input type="number" id="numtotal" name="numtotal" class="form-control"
+                                value="{{lasventas.total}}"
+                                minlength="1" maxlength="6"  required>
+                    <div class="form-group py-3">
+                        <h6>Fecha de venta</h6>
+                                    <input type="date" id="datefechaventa" name="datefechaventa" class="form-control"
+                                    value="{{lasventas.fecha_venta}}"
+                                    minlength="1" maxlength="6"  required>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-success">Guardar Venta</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- la tarjeta -->
+
+        <!--Aqui codigo tarjeta-->
+
+    </div>
+</div><!--fila en editar-->
+
+
+{% endblock  %}
